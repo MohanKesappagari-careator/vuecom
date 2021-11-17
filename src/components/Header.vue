@@ -3,7 +3,20 @@
     <div class="navbar navbar-dark bg-primary shadow-sm">
       <div class="navabr-brad align-item-center d-flex">
         <i class="fas fa-shipping-fast logo">&nbsp;<strong>Kart</strong></i>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="search products"
+          />
+        </div>
+        <span class="fas fa-search search-item"></span>
       </div>
+      <button class="btn btn-primnary">
+        <i class="fas fa-cart-plus cart">
+          <div class="badge bg-danger">5</div>
+        </i>
+      </button>
     </div>
   </header>
 </template>
@@ -22,5 +35,25 @@ export default {
 }
 strong {
   font-size: 2rem;
+}
+.form-control {
+  margin-left: 2rem;
+  width: 30rem;
+  margin-top: 0.5rem;
+  border-radius: 0.3rem;
+}
+.search-item {
+  position: absolute;
+  z-index: 10;
+  top: 1.6rem;
+  right: 52%;
+  color: blue;
+}
+.cart {
+  color: white;
+  font-size: 1.8em;
+}
+.badge {
+  font-size: 0.7rem;
 }
 </style>
