@@ -73,6 +73,14 @@ export default {
   computed: {
     ...mapState(["products"]),
   },
+  data() {
+    return {
+      gtotal: 0,
+    };
+  },
+  mounted() {
+    this.products.map((val) => (this.gtotal += val.price));
+  },
 };
 </script>
 
