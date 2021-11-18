@@ -1,16 +1,14 @@
 <template>
   <Header />
-  <Product />
+  <router-view />
 </template>
 
 <script>
 import Header from "./components/Header";
-import Product from "./components/Product";
 export default {
   name: "App",
   components: {
     Header,
-    Product,
   },
 };
 </script>

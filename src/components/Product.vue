@@ -66,13 +66,16 @@
         <p>
           <strong style="font-size: 1rem">Price:</strong>&#8377;{{ item.price }}
         </p>
-        <button class="btn btn-primary">Add to Cart</button>
+        <button class="btn btn-primary" @click="addToCart(item)">
+          Add to Cart
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 import axios from "axios";
 export default {
   name: "Product",
@@ -87,6 +90,14 @@ export default {
       .get(this.uri)
       .then((res) => (this.product = res.data))
       .catch((e) => console.log(e));
+
+    console.log(this.products);
+  },
+  computed: {
+    ...mapState(["products"]),
+  },
+  methods: {
+    ...mapMutations(["addToCart"]),
   },
 };
 </script>

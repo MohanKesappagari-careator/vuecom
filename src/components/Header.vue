@@ -13,9 +13,13 @@
         <span class="fas fa-search search-item"></span>
       </div>
       <button class="btn btn-primnary">
-        <i class="fas fa-cart-plus cart">
-          <div class="badge bg-danger">5</div>
-        </i>
+        <router-link to="/cart">
+          <i class="fas fa-cart-plus cart">
+            <div class="badge bg-danger">
+              {{ $store.state.products.length }}
+            </div>
+          </i>
+        </router-link>
       </button>
     </div>
   </header>
