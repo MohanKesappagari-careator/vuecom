@@ -31,6 +31,7 @@
                     border-radius: 0.5rem;
                     border: none;
                   "
+                  @click="removeCartItem(item)"
                 >
                   <i class="fas fa-trash-alt"></i>
                 </button>
@@ -61,17 +62,23 @@
       />
       <h4>Your cart is empty!</h4>
       <h6>Add item to it now</h6>
-      <button routerLink="/products" class="btn btn-primary">Shop Now</button>
+      <button class="btn btn-primary" @click="redirect">Shop Now</button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapMutations, mapState } from "vuex";
 export default {
   name: "Cart",
   computed: {
     ...mapState(["products"]),
+  },
+  methods: {
+    ...mapMutations(["removeCartItem"]),
+    redirect() {
+      this.$router.push("/");
+    },
   },
   data() {
     return {

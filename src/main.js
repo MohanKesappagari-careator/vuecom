@@ -15,6 +15,13 @@ const store = createStore({
       state.products.push(obj);
       console.log(obj);
     },
+    removeCartItem(state, payload) {
+      state.products.map((val, index) => {
+        if (payload.id === val.id) {
+          state.products.splice(index, 1);
+        }
+      });
+    },
   },
 });
 const app = createApp(App);

@@ -106,16 +106,15 @@ export default {
   margin: 1rem;
 }
 .item {
-  margin: 0.5rem;
+  margin: 0px 1rem;
   text-align: center;
 }
 .item img {
-  width: 6rem;
-  height: 6rem;
-  margin-bottom: 1rem;
+  width: 8rem;
+  height: 8rem;
 }
 .card {
-  margin: 0.5rem;
+  margin: 1rem;
 }
 .card img {
   width: 10rem;
