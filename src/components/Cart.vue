@@ -40,7 +40,18 @@
             <tr>
               <td colspan="4"></td>
               <td><button class="btn btn-danger">Empty Cart</button></td>
-              <td><button class="btn btn-primary">ShopMore</button></td>
+              <td>
+                <button
+                  class="btn btn-primary"
+                  @click="
+                    () => {
+                      this.$router.push('/');
+                    }
+                  "
+                >
+                  ShopMore
+                </button>
+              </td>
               <td><button class="btn btn-success">Checkout</button></td>
               <td>
                 <strong>GrandTotal:&#8377;{{ gtotal }}</strong>

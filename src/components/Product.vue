@@ -41,7 +41,7 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="card col-md-2" v-for="item in product" :key="item">
+      <div class="card col-md-2" v-for="(item, index) in product" :key="item">
         <img :src="item.image" alt="" />
         <h5
           style="
@@ -66,8 +66,27 @@
         <p>
           <strong style="font-size: 1rem">Price:</strong>&#8377;{{ item.price }}
         </p>
-        <button class="btn btn-primary" @click="addToCart(item)">
+
+        <button
+          class="btn btn-primary"
+          @click="
+            addToCart(item);
+            cart(index);
+          "
+          v-if="item.incart === false"
+        >
           Add to Cart
+        </button>
+        <button
+          class="btn btn-warning"
+          v-if="item.incart === true"
+          @click="
+            () => {
+              this.$router.push('/cart');
+            }
+          "
+        >
+          Go to Cart
         </button>
       </div>
     </div>
@@ -83,21 +102,34 @@ export default {
     return {
       product: [],
       uri: "https://fakestoreapi.com/products",
+      inCart: false,
     };
   },
   mounted() {
     axios
       .get(this.uri)
-      .then((res) => (this.product = res.data))
+      .then((res) => {
+        res.data.map((val) => {
+          let obj = Object.assign(val, { incart: false });
+          this.product.push(obj);
+        });
+      })
       .catch((e) => console.log(e));
-
-    console.log(this.products);
   },
+  watch: {},
   computed: {
     ...mapState(["products"]),
   },
   methods: {
     ...mapMutations(["addToCart"]),
+    cart(index) {
+      let update = { ...this.product[index], incart: true };
+      this.product = [
+        ...this.product.slice(0, index),
+        update,
+        ...this.product.slice(index + 1),
+      ];
+    },
   },
 };
 </script>
@@ -115,6 +147,7 @@ export default {
 }
 .card {
   margin: 1rem;
+  padding: 4rem;
 }
 .card img {
   width: 10rem;
