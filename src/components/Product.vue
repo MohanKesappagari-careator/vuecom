@@ -109,6 +109,7 @@ export default {
     axios
       .get(this.uri)
       .then((res) => {
+        this.addproducts(res.data);
         res.data.map((val) => {
           let obj = Object.assign(val, { incart: false });
           this.product.push(obj);
@@ -121,7 +122,7 @@ export default {
     ...mapState(["products"]),
   },
   methods: {
-    ...mapMutations(["addToCart"]),
+    ...mapMutations(["addToCart", "addproducts"]),
     cart(index) {
       let update = { ...this.product[index], incart: true };
       this.product = [

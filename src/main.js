@@ -7,9 +7,13 @@ const store = createStore({
   state() {
     return {
       products: [],
+      allproducts: [],
     };
   },
   mutations: {
+    addproducts(state, product) {
+      state.allproducts = product;
+    },
     addToCart(state, payload) {
       let obj = Object.assign(payload, { quantity: 1, total: payload.price });
       state.products.push(obj);
