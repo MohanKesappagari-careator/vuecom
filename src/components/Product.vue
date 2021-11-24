@@ -41,7 +41,7 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="card col-md-2" v-for="(item, index) in product" :key="item">
+      <div class="card col-md-2" v-for="(item, index) in pro" :key="item">
         <img :src="item.image" alt="" />
         <h5
           style="
@@ -105,8 +105,8 @@ export default {
       inCart: false,
     };
   },
-  mounted() {
-    axios
+  async mounted() {
+    await axios
       .get(this.uri)
       .then((res) => {
         this.addproducts(res.data);
@@ -115,22 +115,15 @@ export default {
           this.product.push(obj);
         });
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e)),
+      await this.incart();
   },
   watch: {},
   computed: {
-    ...mapState(["products"]),
+    ...mapState(["products", "pro"]),
   },
   methods: {
-    ...mapMutations(["addToCart", "addproducts"]),
-    cart(index) {
-      let update = { ...this.product[index], incart: true };
-      this.product = [
-        ...this.product.slice(0, index),
-        update,
-        ...this.product.slice(index + 1),
-      ];
-    },
+    ...mapMutations(["addToCart", "addproducts", "incart", "cart"]),
   },
 };
 </script>
