@@ -18,11 +18,9 @@ const store = createStore({
     addToCart(state, payload) {
       let obj = Object.assign(payload, { quantity: 1, total: payload.price });
       state.products.push(obj);
-      console.log(obj);
     },
     cart(state, index) {
       let update = { ...state.pro[index], incart: true };
-      console.log(update);
       state.pro = [
         ...state.pro.slice(0, index),
         update,
@@ -60,7 +58,6 @@ const store = createStore({
         typeof state.products !== "undefined" &&
         state.products.length === 0
       ) {
-        console.log("no cart");
         state.allproducts.map((val) => {
           let obj = Object.assign(val, { incart: false });
           state.pro.push(obj);
@@ -70,18 +67,14 @@ const store = createStore({
           state.products.map((val) => {
             if (val.id === pro.id) {
               let obj = Object.assign(pro, { incart: true });
-              console.log(obj, "O");
               state.pro.push(obj);
-              console.log("id euql", state.pro);
             } else {
               let obj = Object.assign(pro, { incart: false });
               state.pro.push(obj);
-              console.log("id not");
             }
           });
         });
       }
-      console.log(state.pro[0], ">>");
     },
   },
 });
