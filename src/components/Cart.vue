@@ -22,7 +22,21 @@
               <td><img style="width: 5rem" :src="item.image" alt="" /></td>
               <td style="width: 25%">{{ item.description }}</td>
               <td style="width: 15%">{{ item.price }}</td>
-              <td style="width: 15%">{{ item.quantity }}</td>
+              <td style="width: 15%">
+                <div class="buttons">
+                  <i
+                    class="fas fa-plus"
+                    @click="increment(index)"
+                    style="cursor: pointer"
+                  ></i>
+                  <p>{{ item.quantity }}</p>
+                  <i
+                    class="fas fa-minus"
+                    @click="decrement(index)"
+                    style="cursor: pointer"
+                  ></i>
+                </div>
+              </td>
               <td style="width: 15%">{{ item.total }}</td>
               <td>
                 <button
@@ -39,13 +53,17 @@
             </tr>
             <tr>
               <td colspan="4"></td>
-              <td><button class="btn btn-danger">Empty Cart</button></td>
+              <td>
+                <button class="btn btn-danger" @click="removeAll">
+                  Empty Cart
+                </button>
+              </td>
               <td>
                 <button
                   class="btn btn-primary"
                   @click="
                     () => {
-                      this.$router.push('/');
+                      $router.push('/');
                     }
                   "
                 >
@@ -54,7 +72,9 @@
               </td>
               <td><button class="btn btn-success">Checkout</button></td>
               <td>
-                <strong>GrandTotal:&#8377;{{ gtotal }}</strong>
+                <strong v-for="(t, index) in total" :key="index"
+                  >GrandTotal:&#8377;{{ t }}</strong
+                >
               </td>
             </tr>
           </tbody>
@@ -84,9 +104,14 @@ export default {
   name: "Cart",
   computed: {
     ...mapState(["products"]),
+    total() {
+      return this.products.map(
+        (val) => (this.gtotal = val.price * val.quantity)
+      );
+    },
   },
   methods: {
-    ...mapMutations(["removeCartItem"]),
+    ...mapMutations(["removeCartItem", "removeAll", "increment", "decrement"]),
     redirect() {
       this.$router.push("/");
     },
@@ -121,5 +146,17 @@ export default {
   font-weight: 400;
   padding: 0.9rem 5rem;
   border-radius: 0.4rem !important;
+}
+.buttons {
+  display: flex;
+  margin-left: -2.5rem;
+  margin-top: -0.5rem;
+  justify-items: start;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.buttons p {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
 }
 </style>

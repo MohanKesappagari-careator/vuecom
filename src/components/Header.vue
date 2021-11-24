@@ -1,7 +1,15 @@
 <template>
   <header>
     <div class="navbar navbar-dark bg-primary shadow-sm">
-      <div class="navabr-brad align-item-center d-flex">
+      <div
+        class="navabr-brad align-item-center d-flex"
+        style="cursor: pointer"
+        @click="
+          () => {
+            $router.push('/');
+          }
+        "
+      >
         <i class="fas fa-shipping-fast logo">&nbsp;<strong>Kart</strong></i>
         <div class="form-group">
           <input

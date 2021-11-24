@@ -82,7 +82,7 @@
           v-if="item.incart === true"
           @click="
             () => {
-              this.$router.push('/cart');
+              $router.push('/cart');
             }
           "
         >

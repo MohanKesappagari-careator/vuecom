@@ -22,6 +22,23 @@ const store = createStore({
         }
       });
     },
+    removeAll(state) {
+      state.products = [];
+    },
+    increment(state, index) {
+      state.products[index].quantity = state.products[index].quantity + 1;
+      state.products[index].total =
+        state.products[index].total * state.products[index].quantity;
+      console.log(state.products[index].quantity);
+    },
+    decrement(state, index) {
+      if (state.products[index].quantity > 1) {
+        state.products[index].quantity = state.products[index].quantity - 1;
+        state.products[index].total =
+          state.products[index].total * state.products[index].quantity;
+        console.log(state.products[index].quantity);
+      }
+    },
   },
 });
 const app = createApp(App);
